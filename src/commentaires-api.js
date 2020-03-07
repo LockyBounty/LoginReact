@@ -15,14 +15,19 @@ router.get("/api/commentaires", (req, res) => {
   res.send(commentairesTri);
 });
 
-router.post("/api/commentaires", (req, res) => {
+function ensureAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) return next();
+  res.send(401);
+}
+
+router.post("/api/commentaires", ensureAuthenticated, (req, res) => {
   const { message } = req.body;
-  const newCommentaires = {
+  const newCommentaire = {
     _id: new Date().getTime(),
     message,
-    author: "unknown"
+    author: req.user.displayName
   };
-  commentaires.push(newCommentaires);
+  commentaires.push(newCommentaire);
   res.send({ message: "Thanks!" });
 });
 
