@@ -1,8 +1,8 @@
-#A login in React.js
+#A login in Next.js
 
 
-- React.js (Next.js)
-- GraphQL
-- Node.js
+- Next.js
+- Auth0
+- Passport
 
 
